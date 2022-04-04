@@ -15,6 +15,9 @@ xmlhttp.open("GET", './images', true);
 xmlhttp.send();
 
 //-------------------------------------------------------------------
+numberOfImages = 15;
+loadImages();
+//-------------------------------------------------------------------
 
 const submitBtn = document.querySelector('.capcha__submit-btn');
 

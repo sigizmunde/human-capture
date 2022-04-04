@@ -61,6 +61,7 @@ body {
 .capcha__heading {
     font-size: 18px;
     font-weight: 700;
+    margin-bottom: 8px;;
 }
 
 .capcha__heading--bold {
