@@ -1,5 +1,7 @@
 :root {
     --color-accent: #4a90e2;
+    --color-soft: #888888;
+    --color-strong: #252525;
 }
 
 html {
@@ -31,7 +33,15 @@ ul {
 }
 
 body {
-    padding: 42px;
+    margin: 0;
+    padding: 0;
+}
+
+.capcha__frame {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .capcha__container {
@@ -40,8 +50,8 @@ body {
     font-weight: 400;
     width: 400px;
     background-color: white;
-    color: #252525;
-    border: solid 1px #888888;
+    color: var(--color-strong);
+    border: solid 1px  var(--color-soft);
 }
 
 .capcha__container--footer {
@@ -129,7 +139,24 @@ body {
 }
 
 .capcha__icons {
+    display: flex;
     margin-right: auto;
+}
+
+.capcha__icon {
+    color: var(--color-soft);
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.capcha__icon:not(:last-child) {
+    padding-right: 12px;
+}
+
+.capcha__icon--active {
+    color: var(--color-accent);
+    font-weight: 700;
 }
 
 .capcha__submit-btn {
@@ -148,8 +175,9 @@ body {
 }
 
 .capcha__submit-btn:hover {
-    -webkit-box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.5); 
-          box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.5);
+    cursor: pointer;
+    /* -webkit-box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.5); 
+          box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.5); */
 }
 
 .capcha__submit-btn:active {
