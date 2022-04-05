@@ -29,7 +29,7 @@ const textContent = {
   ua: {
     subHeading: "Натисніть «Перевірити», відмітивши всі відповідні фото",
     heading:
-      'Позначте всі фото, на фких зображено<span class="capcha__heading--bold">людей</span>',
+      'Позначте всі фото, на яких зображено <span class="capcha__heading--bold">людей</span>',
     alertPositive: "Хіба русня не люди? Да ето так.\nВітаємо, ви пройшли тест!",
     alertNegative: "Ну що ж ви, хіба русня — то люди?\nДавайте ще раз.",
     alertDefault: "Схоже, ви не обрали жодної світлини",
@@ -37,7 +37,7 @@ const textContent = {
   },
 };
 
-const alerts = assignAlerts("en");
+let alerts = assignAlerts("en");
 
 //-------------------------------------------------------------------
 const numberOfImages = 15;
@@ -75,10 +75,13 @@ function onItemClick(event) {
 }
 
 function onSubmitBtnClick() {
-  if (document.querySelector(".capcha__icons--marked").length > 0) {
+  if (document.querySelectorAll(".capcha__item--marked").length > 0) {
     alert(alerts.negative);
+    loadImages();
+  } else {
+    alert(alerts.positive);
+    location.reload();
   }
-  location.reload();
 }
 
 function randomIntegerArray(targetLength, range) {
@@ -97,11 +100,27 @@ function randomIntegerArray(targetLength, range) {
 }
 
 function onLangSwitchClick() {
-  switchLang();
+  let lang = "en";
+  for (const langIcon of this.children) {
+    langIcon.classList.toggle("capcha__icon--active");
+    if (langIcon.classList.contains("capcha__icon--active")) {
+      lang = langIcon.innerText.toLowerCase();
+    }
+  }
+  switchLang(lang);
 }
 
 function switchLang(lang) {
-  textContent[lang];
+  document.querySelector(".capcha__heading").innerHTML =
+    textContent[lang].heading;
+  document.querySelector(".capcha__header > p").innerHTML =
+    textContent[lang].subHeading;
+  document.querySelector(".capcha__submit-btn").innerHTML =
+    textContent[lang].btnCaption;
+  alerts = assignAlerts(lang);
+  for (const element of document.querySelectorAll("[lang]")) {
+    element.lang = lang;
+  } // warning! this also changes html lang attribute
 }
 
 function assignAlerts(lang) {
